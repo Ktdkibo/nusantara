@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ProvinsiSumatraUtara">
+    tools:context=".ProvinsiSumateraSelatan">
 
     <!-- Header tetap di atas -->
     <FrameLayout
@@ -65,7 +65,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautarapakaian"
+                        android:src="@drawable/sumateraselatanpakaian"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -91,7 +91,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/budaya_sumaterautara"
+                        android:src="@drawable/budaya_sumateraselatan"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -117,7 +117,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaramakanan"
+                        android:src="@drawable/sumateraselatanmakanan"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -143,7 +143,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaratari"
+                        android:src="@drawable/sumateraselatantarian"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -169,7 +169,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaraobjekwisata"
+                        android:src="@drawable/sumateraselatanobjekwisata"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -195,7 +195,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaraalatmusik"
+                        android:src="@drawable/sumateraselatanalatmusik"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -221,7 +221,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaraupacara"
+                        android:src="@drawable/sumateraselatanupacara"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -247,7 +247,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautarasenjata"
+                        android:src="@drawable/sumateraselatansenjata"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -273,7 +273,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaraproduk"
+                        android:src="@drawable/sumateraselatanproduk"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -299,7 +299,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautarapermainan"
+                        android:src="@drawable/sumateraselatanpermainan"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -325,7 +325,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautaraflora"
+                        android:src="@drawable/sumateraselatanflora"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -351,7 +351,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/sumaterautarafauna"
+                        android:src="@drawable/sumateraselatanfauna"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 

@@ -105,7 +105,14 @@ public class BudayaFragment extends Fragment {
         // Pindah Menu Provinsi Sumatera Utara
         LinearLayout layoutSumatraUtara = view.findViewById(R.id.layoutSumateraUtara);
         layoutSumatraUtara.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ProvinsiSumatraUtara.class);
+            Intent intent = new Intent(getActivity(), ProvinsiSumateraUtara.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Sumatera Selatan
+        LinearLayout layoutSumatraSelatan = view.findViewById(R.id.layoutSumateraSelatan);
+        layoutSumatraUtara.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ProvinsiSumateraSelatan.class);
             startActivity(intent);
         });
 

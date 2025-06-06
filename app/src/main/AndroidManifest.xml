@@ -15,7 +15,16 @@
         android:theme="@style/Theme.Nusantara"
         tools:targetApi="31">
         <activity
-            android:name=".ProvinsiSumatraUtara"
+            android:name=".ProvinsiSumateraSelatan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProvinsiSumateraUtara"
             android:exported="false" />
         <activity
             android:name=".ProvinsiAceh"
@@ -37,8 +46,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.Nusantara.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Nusantara.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
