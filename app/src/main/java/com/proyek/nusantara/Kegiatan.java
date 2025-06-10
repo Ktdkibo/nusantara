@@ -1,11 +1,13 @@
 package com.proyek.nusantara;
 
+import com.google.firebase.Timestamp;
+
 public class Kegiatan {
     private String id;
     private String judul;
     private String ceritaSingkat;
     private String isiCerita;
-    private String tanggal;
+    private Timestamp tanggal;
     private String thumbnailBase64;
     private String userId;
 
@@ -13,7 +15,7 @@ public class Kegiatan {
         // Diperlukan oleh Firestore
     }
 
-    public Kegiatan(String id, String judul, String ceritaSingkat, String isiCerita, String tanggal, String thumbnailBase64, String userId) {
+    public Kegiatan(String id, String judul, String ceritaSingkat, String isiCerita, Timestamp  tanggal, String thumbnailBase64, String userId) {
         this.id = id;
         this.judul = judul;
         this.ceritaSingkat = ceritaSingkat;
@@ -56,10 +58,10 @@ public class Kegiatan {
     }
 
     // Getter & Setter untuk Tanggal
-    public String getTanggal() {
+    public Timestamp  getTanggal() {
         return tanggal;
     }
-    public void setTanggal(String tanggal) {
+    public void setTanggal(Timestamp  tanggal) {
         this.tanggal = tanggal;
     }
 

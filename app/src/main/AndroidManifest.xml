@@ -8,26 +8,125 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/ic_nusantara"
+        android:icon="@drawable/ic_nusantara2"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_nusantara"
+        android:roundIcon="@drawable/ic_nusantara2"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nusantara"
         tools:targetApi="31">
         <activity
-            android:name=".ProvinsiSumateraSelatan"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ProvinsiSumateraUtara"
+            android:name=".provinsi.PapuaBaratDaya"
             android:exported="false" />
         <activity
-            android:name=".ProvinsiAceh"
+            android:name=".provinsi.PapuaSelatan"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.PapuaPegunungan"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.PapuaTengah"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Papua"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.PapuaBarat"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Maluku"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.MalukuUtara"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SulawesiSelatan"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SulawesiTenggara"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SulawesiUtara"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SulawesiTengah"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SulawesiBarat"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Gorontalo"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.NusaTenggaraBarat"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.NusaTenggaraTimur"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Bali"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.JawaTimur"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Yogyakarta"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.JawaTengah"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.JawaBarat"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.DkiJakarta"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Banten"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.KalimantanUtara"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.KalimantanTengah"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.KalimantanSelatan"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.KalimantanTimur"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.KalimantanBarat"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.BangkaBelitung"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Lampung"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Jambi"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.KepulauanRiau"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Riau"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Bengkulu"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SumateraBarat"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.SumateraSelatan"
+            android:exported="true" />
+        <activity
+            android:name=".provinsi.SumateraUtara"
+            android:exported="false" />
+        <activity
+            android:name=".provinsi.Aceh"
             android:exported="false" />
         <activity
             android:name=".EditKegiatanActivity"

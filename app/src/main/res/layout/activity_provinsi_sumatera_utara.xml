@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ProvinsiSumateraUtara">
+    tools:context=".provinsi.SumateraUtara">
 
     <!-- Header tetap di atas -->
     <FrameLayout
@@ -41,7 +41,7 @@
                 android:layout_height="133dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/header_provinsisumaterautara" />
+                android:src="@drawable/header_sumaterautara" />
 
 
             <!-- Grid Budaya -->

@@ -5,6 +5,8 @@ import static androidx.core.app.ActivityCompat.startActivityForResult;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
@@ -24,6 +26,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.storage.FirebaseStorage;
@@ -83,7 +86,7 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             String judul = etJudul.getText().toString().trim();
             String cerita = etCerita.getText().toString().trim();
             String isiCerita = etIsiCerita.getText().toString().trim();
-            String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            Timestamp tanggal = new Timestamp(new Date());
 
             // Validasi
             if (judul.isEmpty() || cerita.isEmpty() || base64Image == null) {
@@ -101,17 +104,25 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             imgThumbnail.setVisibility(View.VISIBLE);
             Glide.with(this).load(imageUri).into(imgThumbnail);
 
-            // Ambil userId dari session (misal via SessionManager)
-            SessionManager session = new SessionManager(this);
-            String userId = session.getUserId();
-            if (userId == null) {
-                Toast.makeText(this, "User tidak ditemukan, silakan login kembali.", Toast.LENGTH_SHORT).show();
+            // ❗Cek koneksi internet
+            if (!isInternetAvailable()) {
+                Toast.makeText(this, "Tidak ada koneksi internet. Silakan periksa jaringan dan klik Simpan lagi.", Toast.LENGTH_LONG).show();
                 return;
             }
 
             // Tampilkan loading
             progressBar.setVisibility(View.VISIBLE);
             btnSimpan.setEnabled(false);
+
+            // Ambil userId dari session
+            SessionManager session = new SessionManager(this);
+            String userId = session.getUserId();
+            if (userId == null) {
+                Toast.makeText(this, "User tidak ditemukan, silakan login kembali.", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                btnSimpan.setEnabled(true);
+                return;
+            }
 
             // Siapkan data untuk disimpan
             Map<String, Object> kegiatan = new HashMap<>();
@@ -121,6 +132,7 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             kegiatan.put("tanggal", tanggal);
             kegiatan.put("thumbnailBase64", base64Image);
             kegiatan.put("userId", userId);
+
 
             // Simpan ke Firestore
             FirebaseFirestore.getInstance()
@@ -200,5 +212,14 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             Toast.makeText(this, "Gagal mengonversi gambar", Toast.LENGTH_SHORT).show();
             base64Image = null;
         }
+    }
+
+    private boolean isInternetAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            return activeNetwork != null && activeNetwork.isConnected();
+        }
+        return false;
     }
 }

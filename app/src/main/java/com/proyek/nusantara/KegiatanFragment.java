@@ -168,7 +168,7 @@ public class KegiatanFragment extends Fragment {
                     recyclerView.setVisibility(View.VISIBLE);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Gagal mengambil data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Gagal: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     // Tetap sembunyikan loading
                     progressBar.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);

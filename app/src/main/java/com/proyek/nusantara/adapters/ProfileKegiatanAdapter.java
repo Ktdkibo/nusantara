@@ -16,13 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.Timestamp;
 import com.proyek.nusantara.DetailActivity;
 import com.proyek.nusantara.EditKegiatanActivity;
 import com.proyek.nusantara.Kegiatan;
 import com.proyek.nusantara.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatanAdapter.ViewHolder> {
     public interface OnProfileActionListener {
@@ -52,10 +56,20 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
     public void onBindViewHolder(@NonNull ProfileKegiatanAdapter.ViewHolder holder, int position) {
         Kegiatan kegiatan = kegiatanList.get(position);
 
-        // Set teks: judul, tanggal, cerita singkat
+        // Set judul dan cerita singkat
         holder.tvJudul.setText(kegiatan.getJudul());
-        holder.tvTanggal.setText(kegiatan.getTanggal());
         holder.tvCerita.setText(kegiatan.getCeritaSingkat());
+
+        // Format dan set tanggal
+        Timestamp ts = kegiatan.getTanggal();
+        String formattedDate;
+        if (ts != null) {
+            Date date = ts.toDate();
+            formattedDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date);
+        } else {
+            formattedDate = "-";
+        }
+        holder.tvTanggal.setText(formattedDate);
 
         // Load Thumnail Decode Base64 menjadi Bitmap, lalu set ke ImageView
         String base64 = kegiatan.getThumbnailBase64();
@@ -82,7 +96,7 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
             // Kirim data ke DetailActivity
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("judul", kegiatan.getJudul());
-            intent.putExtra("tanggal", kegiatan.getTanggal());
+            intent.putExtra("tanggal", formattedDate);
             intent.putExtra("ceritaSingkat", kegiatan.getCeritaSingkat());
             intent.putExtra("isiCerita", kegiatan.getIsiCerita());
             intent.putExtra("thumbnailBase64", kegiatan.getThumbnailBase64());
@@ -94,7 +108,7 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
             Intent intent = new Intent(context, EditKegiatanActivity.class);
             intent.putExtra("postId", kegiatan.getId());
             intent.putExtra("judul", kegiatan.getJudul());
-            intent.putExtra("tanggal", kegiatan.getTanggal());
+            intent.putExtra("tanggal", formattedDate);
             intent.putExtra("ceritaSingkat", kegiatan.getCeritaSingkat());
             intent.putExtra("isiCerita", kegiatan.getIsiCerita());
             intent.putExtra("thumbnailBase64", kegiatan.getThumbnailBase64());

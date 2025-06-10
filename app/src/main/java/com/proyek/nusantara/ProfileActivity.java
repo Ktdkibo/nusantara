@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.proyek.nusantara.adapters.ProfileKegiatanAdapter;
 
@@ -84,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> {
+                    Log.e("ProfileActivity", "Gagal mengambil data user", e);
                     tvNama.setText("Nama: Tidak tersedia");
                     tvEmail.setText("Email: Tidak tersedia");
                 });
@@ -160,6 +162,7 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance()
                 .collection("kegiatan")
                 .whereEqualTo("userId", currentUid)
+                .orderBy("tanggal", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Kegiatan> kegiatanList = new ArrayList<>();

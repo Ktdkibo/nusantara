@@ -377,7 +377,7 @@
 
                 <!-- KALIMANTAN TIMUR -->
                 <LinearLayout
-                    android:id="@+id/layoutKalimantanTmur"
+                    android:id="@+id/layoutKalimantanTimur"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -927,7 +927,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/bdaya_maluku"
+                        android:src="@drawable/budaya_maluku"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 

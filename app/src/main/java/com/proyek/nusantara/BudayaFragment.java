@@ -17,6 +17,45 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.proyek.nusantara.provinsi.Aceh;
+import com.proyek.nusantara.provinsi.Bali;
+import com.proyek.nusantara.provinsi.BangkaBelitung;
+import com.proyek.nusantara.provinsi.Banten;
+import com.proyek.nusantara.provinsi.Bengkulu;
+import com.proyek.nusantara.provinsi.DkiJakarta;
+import com.proyek.nusantara.provinsi.Gorontalo;
+import com.proyek.nusantara.provinsi.Jambi;
+import com.proyek.nusantara.provinsi.JawaBarat;
+import com.proyek.nusantara.provinsi.JawaTengah;
+import com.proyek.nusantara.provinsi.JawaTimur;
+import com.proyek.nusantara.provinsi.KalimantanBarat;
+import com.proyek.nusantara.provinsi.KalimantanSelatan;
+import com.proyek.nusantara.provinsi.KalimantanTengah;
+import com.proyek.nusantara.provinsi.KalimantanTimur;
+import com.proyek.nusantara.provinsi.KalimantanUtara;
+import com.proyek.nusantara.provinsi.KepulauanRiau;
+import com.proyek.nusantara.provinsi.Lampung;
+import com.proyek.nusantara.provinsi.Maluku;
+import com.proyek.nusantara.provinsi.MalukuUtara;
+import com.proyek.nusantara.provinsi.NusaTenggaraBarat;
+import com.proyek.nusantara.provinsi.NusaTenggaraTimur;
+import com.proyek.nusantara.provinsi.Papua;
+import com.proyek.nusantara.provinsi.PapuaBarat;
+import com.proyek.nusantara.provinsi.PapuaBaratDaya;
+import com.proyek.nusantara.provinsi.PapuaPegunungan;
+import com.proyek.nusantara.provinsi.PapuaSelatan;
+import com.proyek.nusantara.provinsi.PapuaTengah;
+import com.proyek.nusantara.provinsi.Riau;
+import com.proyek.nusantara.provinsi.SulawesiBarat;
+import com.proyek.nusantara.provinsi.SulawesiSelatan;
+import com.proyek.nusantara.provinsi.SulawesiTengah;
+import com.proyek.nusantara.provinsi.SulawesiTenggara;
+import com.proyek.nusantara.provinsi.SulawesiUtara;
+import com.proyek.nusantara.provinsi.SumateraBarat;
+import com.proyek.nusantara.provinsi.SumateraSelatan;
+import com.proyek.nusantara.provinsi.SumateraUtara;
+import com.proyek.nusantara.provinsi.Yogyakarta;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,29 +133,272 @@ public class BudayaFragment extends Fragment {
             startActivity(intent);
         });
 
-
         // Pindah Menu Provinsi Aceh
         LinearLayout layoutAceh = view.findViewById(R.id.layoutAceh);
         layoutAceh.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ProvinsiAceh.class);
+            Intent intent = new Intent(getActivity(), Aceh.class);
             startActivity(intent);
         });
 
         // Pindah Menu Provinsi Sumatera Utara
-        LinearLayout layoutSumatraUtara = view.findViewById(R.id.layoutSumateraUtara);
-        layoutSumatraUtara.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ProvinsiSumateraUtara.class);
+        LinearLayout layoutSumateraUtara = view.findViewById(R.id.layoutSumateraUtara);
+        layoutSumateraUtara.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SumateraUtara.class);
             startActivity(intent);
         });
 
         // Pindah Menu Provinsi Sumatera Selatan
-        LinearLayout layoutSumatraSelatan = view.findViewById(R.id.layoutSumateraSelatan);
-        layoutSumatraUtara.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ProvinsiSumateraSelatan.class);
+        LinearLayout layoutSumateraSelatan = view.findViewById(R.id.layoutSumateraSelatan);
+        layoutSumateraSelatan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SumateraSelatan.class);
             startActivity(intent);
         });
 
-        // Inisialisasi data budaya (isi sesuai id LinearLayout di XML)
+        // Pindah Menu Provinsi Sumatera Barat
+        LinearLayout layoutSumateraBarat = view.findViewById(R.id.layoutSumateraBarat);
+        layoutSumateraBarat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SumateraBarat.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Bengkulu
+        LinearLayout layoutBengkulu = view.findViewById(R.id.layoutBengkulu);
+        layoutBengkulu.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Bengkulu.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Riau
+        LinearLayout layoutRiau = view.findViewById(R.id.layoutRiau);
+        layoutRiau.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Riau.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Kepulauan Riau
+        LinearLayout layoutKepulauanRiau = view.findViewById(R.id.layoutKepulauanRiau);
+        layoutKepulauanRiau.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KepulauanRiau.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Jambi
+        LinearLayout layoutJambi = view.findViewById(R.id.layoutJambi);
+        layoutJambi.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Jambi.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Lampung
+        LinearLayout layoutLampung = view.findViewById(R.id.layoutLampung);
+        layoutLampung.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Lampung.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Bangka Belitung
+        LinearLayout layoutBangkaBelitung = view.findViewById(R.id.layoutBangkaBelitung);
+        layoutBangkaBelitung.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), BangkaBelitung.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Kalimantan Barat
+        LinearLayout layoutKalimantanBarat = view.findViewById(R.id.layoutKalimantanBarat);
+        layoutKalimantanBarat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KalimantanBarat.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Kalimantan Timur
+        LinearLayout layoutKalimantanTimur = view.findViewById(R.id.layoutKalimantanTimur);
+        layoutKalimantanTimur.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KalimantanTimur.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Kalimantan Selatan
+        LinearLayout layoutKalimantanSelatan = view.findViewById(R.id.layoutKalimantanSelatan);
+        layoutKalimantanSelatan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KalimantanSelatan.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Kalimantan Tengah
+        LinearLayout layoutKalimantanTengah = view.findViewById(R.id.layoutKalimantanTengah);
+        layoutKalimantanTengah.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KalimantanTengah.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Kalimantan Utara
+        LinearLayout layoutKalimantanUtara = view.findViewById(R.id.layoutKalimantanUtara);
+        layoutKalimantanUtara.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KalimantanUtara.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Banten
+        LinearLayout layoutBanten = view.findViewById(R.id.layoutBanten);
+        layoutBanten.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Banten.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Dki Jakarta
+        LinearLayout layoutDkiJakarta = view.findViewById(R.id.layoutDkiJakarta);
+        layoutDkiJakarta.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DkiJakarta.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Jawa Barat
+        LinearLayout layoutJawaBarat = view.findViewById(R.id.layoutJawaBarat);
+        layoutJawaBarat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), JawaBarat.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Jawa Tengah
+        LinearLayout layoutJawaTengah = view.findViewById(R.id.layoutJawaTengah);
+        layoutJawaTengah.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), JawaTengah.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Yogyakarta
+        LinearLayout layoutYogyakarta = view.findViewById(R.id.layoutYogyakarta);
+        layoutYogyakarta.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Yogyakarta.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Jawa Timur
+        LinearLayout layoutJawaTimur = view.findViewById(R.id.layoutJawaTimur);
+        layoutJawaTimur.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), JawaTimur.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Bali
+        LinearLayout layoutBali = view.findViewById(R.id.layoutBali);
+        layoutBali.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Bali.class);
+            startActivity(intent);
+        });
+        // Pindah Menu Provinsi Nusa Tenggara Timur
+        LinearLayout layoutNusaTenggaraTimur = view.findViewById(R.id.layoutNusaTenggaraTimur);
+        layoutNusaTenggaraTimur.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), NusaTenggaraTimur.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Nusa Tenggara Barat
+        LinearLayout layoutNusaTenggaraBarat = view.findViewById(R.id.layoutNusaTenggaraBarat);
+        layoutNusaTenggaraBarat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), NusaTenggaraBarat.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Gorontalo
+        LinearLayout layoutGorontalo = view.findViewById(R.id.layoutGorontalo);
+        layoutGorontalo.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Gorontalo.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Sulawesi Barat
+        LinearLayout layoutSulawesiBarat = view.findViewById(R.id.layoutSulawesiBarat);
+        layoutSulawesiBarat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SulawesiBarat.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Sulawesi Tengah
+        LinearLayout layoutSulawesiTengah = view.findViewById(R.id.layoutSulawesiTengah);
+        layoutSulawesiTengah.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SulawesiTengah.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Sulawesi Utara
+        LinearLayout layoutSulawesiUtara = view.findViewById(R.id.layoutSulawesiUtara);
+        layoutSulawesiUtara.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SulawesiUtara.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Sulawesi Tenggara
+        LinearLayout layoutSulawesiTenggara = view.findViewById(R.id.layoutSulawesiTenggara);
+        layoutSulawesiTenggara.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SulawesiTenggara.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Sulawesi Selatan
+        LinearLayout layoutSulawesiSelatan = view.findViewById(R.id.layoutSulawesiSelatan);
+        layoutSulawesiSelatan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SulawesiSelatan.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Maluku Utara
+        LinearLayout layoutMalukuUtara = view.findViewById(R.id.layoutMalukuUtara);
+        layoutMalukuUtara.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MalukuUtara.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Maluku
+        LinearLayout layoutMaluku = view.findViewById(R.id.layoutMaluku);
+        layoutMaluku.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Maluku.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Papua Barat
+        LinearLayout layoutPapuaBarat = view.findViewById(R.id.layoutPapuaBarat);
+        layoutPapuaBarat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PapuaBarat.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Papua
+        LinearLayout layoutPapua = view.findViewById(R.id.layoutPapua);
+        layoutPapua.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Papua.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Papua Tengah
+        LinearLayout layoutPapuaTengah = view.findViewById(R.id.layoutPapuaTengah);
+        layoutPapuaTengah.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PapuaTengah.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Papua Pegunungan
+        LinearLayout layoutPapuaPegunungan = view.findViewById(R.id.layoutPapuaPegunungan);
+        layoutPapuaPegunungan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PapuaPegunungan.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Papua Selatan
+        LinearLayout layoutPapuaSelatan = view.findViewById(R.id.layoutPapuaSelatan);
+        layoutPapuaSelatan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PapuaSelatan.class);
+            startActivity(intent);
+        });
+
+        // Pindah Menu Provinsi Papua Barat Daya
+        LinearLayout layoutPapuaBaratDaya = view.findViewById(R.id.layoutPapuaBaratDaya);
+        layoutPapuaBaratDaya.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PapuaBaratDaya.class);
+            startActivity(intent);
+        });
+
+        // Inisialisasi data budaya sesuai id LinearLayout XML
         budayaList.add(new BudayaItem("ACEH", R.id.layoutAceh));
         budayaList.add(new BudayaItem("SUMATERA UTARA", R.id.layoutSumateraUtara));
         budayaList.add(new BudayaItem("SUMATERA SELATAN", R.id.layoutSumateraSelatan));
@@ -128,7 +410,7 @@ public class BudayaFragment extends Fragment {
         budayaList.add(new BudayaItem("LAMPUNG", R.id.layoutLampung));
         budayaList.add(new BudayaItem("BANGKA BELITUNG", R.id.layoutBangkaBelitung));
         budayaList.add(new BudayaItem("KALIMANTAN BARAT", R.id.layoutKalimantanBarat));
-        budayaList.add(new BudayaItem("KALIMANTAN TIMUR", R.id.layoutKalimantanTmur));
+        budayaList.add(new BudayaItem("KALIMANTAN TIMUR", R.id.layoutKalimantanTimur));
         budayaList.add(new BudayaItem("KALIMANTAN SELATAN", R.id.layoutKalimantanSelatan));
         budayaList.add(new BudayaItem("KALIMANTAN TENGAH", R.id.layoutKalimantanTengah));
         budayaList.add(new BudayaItem("KALIMANTAN UTARA", R.id.layoutKalimantanUtara));

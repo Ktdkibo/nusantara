@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ProvinsiAceh">
+    tools:context=".provinsi.Aceh">
 
     <!-- Header tetap di atas -->
     <FrameLayout
@@ -40,7 +40,7 @@
                 android:layout_height="133dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/header_provinsiaceh" />
+                android:src="@drawable/header_aceh" />
 
 
             <!-- Grid Budaya -->
