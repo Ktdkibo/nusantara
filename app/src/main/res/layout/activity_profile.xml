@@ -10,89 +10,130 @@
     android:background="@color/white"
     tools:context=".ProfileActivity">
 
-    <!-- Header -->
-    <ImageView
-        android:id="@+id/imgHeader"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/headerumum" />
-
-    <!-- Profil Section -->
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".ProfileActivity">
 
-        <!-- Avatar -->
+        <!-- Header -->
         <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:id="@+id/imgHeader"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/headerumum" />
 
-        <!-- Card Profil -->
-        <androidx.cardview.widget.CardView
+        <!-- Profil Section -->
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="16dp">
+            android:padding="16dp"
+            android:gravity="center_horizontal">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:padding="16dp"
+            <!-- Avatar -->
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <!-- Card Profil -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="16dp">
 
-                <TextView
-                    android:id="@+id/tvNama"
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nama:"
-                    android:textSize="16sp"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Email:"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <EditText
+                        android:id="@+id/etNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nama"
+                        android:inputType="textPersonName"/>
 
-        <!-- Tombol Logout -->
-        <Button
-            android:id="@+id/btnLogout"
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvNama"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Nama:"-->
+<!--                        android:textSize="16sp"/>-->
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email:"
+                        android:layout_marginTop="8dp"
+                        android:textSize="16sp"/>
+
+                    <Button
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Update Profile"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Tombol Logout -->
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:backgroundTint="#F44336"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logout"
-            android:backgroundTint="#F44336"
-            android:textColor="#FFFFFF"/>
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:hint="Search posts"
+            android:inputType="text"/>
+
+        <!-- RecyclerView menampilkan list kegiatan -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvKegiatanProfil"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            tools:listitem="@layout/item_kegiatan_profil"
+            android:contentDescription="List of user activities" />
+
+        <!-- FAB Back Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:contentDescription="Kembali"
+            android:src="@drawable/ic_back"
+            app:backgroundTint="@color/white" />
     </LinearLayout>
 
-    <!-- RecyclerView menampilkan list kegiatan -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvKegiatanProfil"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp"
-        tools:listitem="@layout/item_kegiatan_profil"
-        android:contentDescription="List of user activities" />
-
-    <!-- FAB Back Button -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabback"
+    <ProgressBar
+        android:id="@+id/loadingProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="Kembali"
-        android:src="@drawable/ic_back"
-        app:backgroundTint="@color/white" />
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 </LinearLayout>

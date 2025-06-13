@@ -1,14 +1,26 @@
 package com.proyek.nusantara;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -17,6 +29,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,19 +42,35 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.proyek.nusantara.adapters.ProfileKegiatanAdapter;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView tvNama, tvEmail;
-    private Button btnLogout;
+    private EditText etNama, etSearch;
+    private TextView tvEmail;
+    private Button btnLogout, btnUpdate;
     private FloatingActionButton fabback;
     private RecyclerView rvKegiatan;
     private ProfileKegiatanAdapter adapter;
     private FirebaseAuth mAuth;
     private SessionManager session;
     private String currentUid;
+    private ImageView avatar;
+    private ProgressBar loadingProgress;
+    private Uri selectedImageUri;
+    private List<Kegiatan> allKegiatan = new ArrayList<>();
+
+    private final ActivityResultLauncher<String> pickImage = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    selectedImageUri = uri;
+                    avatar.setImageURI(uri);
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +90,21 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
 
-        tvNama = findViewById(R.id.tvNama);
-        tvEmail = findViewById(R.id.tvEmail);
-
         // Ambil currentUid dari session
         currentUid = session.getUserId();
+
+        // Inisialisasi komponen UI
+        etNama = findViewById(R.id.etNama);
+        tvEmail = findViewById(R.id.tvEmail);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        fabback = findViewById(R.id.fabback);
+        rvKegiatan = findViewById(R.id.rvKegiatanProfil);
+        avatar = findViewById(R.id.avatar);
+        loadingProgress = findViewById(R.id.loadingProgress);
+        etSearch = findViewById(R.id.etSearch);
+
+        loadingProgress.setVisibility(View.VISIBLE);
 
         // Ambil data pengguna dari Firestore
         FirebaseFirestore.getInstance()
@@ -76,21 +115,23 @@ public class ProfileActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         String nama = documentSnapshot.getString("nama");
                         String email = documentSnapshot.getString("email");
+                        String base64Image = documentSnapshot.getString("profileImage");
 
-                        tvNama.setText("Nama: " + (nama != null ? nama : "Tidak tersedia"));
+                        etNama.setText(nama);
                         tvEmail.setText("Email: " + (email != null ? email : "Tidak tersedia"));
-                    } else {
-                        tvNama.setText("Nama: Tidak tersedia");
-                        tvEmail.setText("Email: Tidak tersedia");
+                        if (base64Image != null && !base64Image.isEmpty()) {
+                            Bitmap bitmap = base64ToBitmap(base64Image);
+                            avatar.setImageBitmap(bitmap);
+                        } else {
+                            avatar.setImageResource(R.drawable.ic_launcher_foreground);
+                        }
                     }
+                    loadingProgress.setVisibility(View.GONE);
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("ProfileActivity", "Gagal mengambil data user", e);
-                    tvNama.setText("Nama: Tidak tersedia");
-                    tvEmail.setText("Email: Tidak tersedia");
+                    loadingProgress.setVisibility(View.GONE);
+                    Toast.makeText(this, "Gagal memuat data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
-
-        rvKegiatan = findViewById(R.id.rvKegiatanProfil);
 
         // Set up RecyclerView
         rvKegiatan.setLayoutManager(new LinearLayoutManager(this));
@@ -131,12 +172,84 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         // Back FAB
-        fabback = findViewById(R.id.fabback);
         fabback.setOnClickListener(v -> finish());
 
         // Logout button
-        btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> confirmLogout());
+
+        // button Update avatar
+        avatar.setOnClickListener(v -> pickImage.launch("image/*"));
+        btnUpdate.setOnClickListener(v -> {
+            loadingProgress.setVisibility(View.VISIBLE);
+            String newName = etNama.getText().toString().trim();
+
+            if (newName.isEmpty()) {
+                etNama.setError("Nama tidak boleh kosong");
+                loadingProgress.setVisibility(View.GONE);
+                return;
+            }
+
+            // Update name in Firestore
+            FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(currentUid)
+                    .update("nama", newName)
+                    .addOnSuccessListener(aVoid -> {
+                        if (selectedImageUri != null) {
+                            String base64Image = uriToBase64(selectedImageUri);
+                            FirebaseFirestore.getInstance()
+                                    .collection("users")
+                                    .document(currentUid)
+                                    .update("profileImage", base64Image)
+                                    .addOnSuccessListener(aVoid2 -> {
+                                        if (base64Image != null) {
+                                            Bitmap bitmap = base64ToBitmap(base64Image);
+                                            avatar.setImageBitmap(bitmap);
+                                        }
+                                        selectedImageUri = null;
+                                        loadingProgress.setVisibility(View.GONE);
+                                        Toast.makeText(ProfileActivity.this, "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        loadingProgress.setVisibility(View.GONE);
+                                        Toast.makeText(ProfileActivity.this, "Gagal mengupload foto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        } else {
+                            loadingProgress.setVisibility(View.GONE);
+                            Toast.makeText(ProfileActivity.this, "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        loadingProgress.setVisibility(View.GONE);
+                        Toast.makeText(ProfileActivity.this, "Gagal memperbarui profil: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        });
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = s.toString().toLowerCase();
+                if (query.isEmpty()) {
+                    adapter.submitList(new ArrayList<>(allKegiatan));
+                    return;
+                }
+
+                List<Kegiatan> filteredList = new ArrayList<>();
+                for (Kegiatan kegiatan : allKegiatan) {
+                    if (kegiatan.getJudul().toLowerCase().contains(query) ||
+                            kegiatan.getIsiCerita().toLowerCase().contains(query)) {
+                        filteredList.add(kegiatan);
+                    }
+                }
+                adapter.submitList(filteredList);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
 
     private void confirmLogout() {
@@ -158,6 +271,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadUserPosts() {
         Log.d("ProfileActivity", "Loading posts for userId: " + currentUid);
+        loadingProgress.setVisibility(View.VISIBLE);
 
         FirebaseFirestore.getInstance()
                 .collection("kegiatan")
@@ -165,20 +279,37 @@ public class ProfileActivity extends AppCompatActivity {
                 .orderBy("tanggal", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
-                    List<Kegiatan> kegiatanList = new ArrayList<>();
+                    allKegiatan.clear();
                     for (QueryDocumentSnapshot doc : querySnapshot) {
                         Log.d("ProfileActivity", "Doc found: " + doc.getId());
                         Kegiatan kegiatan = doc.toObject(Kegiatan.class);
                         kegiatan.setId(doc.getId());
-                        kegiatanList.add(kegiatan);
+                        allKegiatan.add(kegiatan);
                     }
-
-                    Log.d("ProfileActivity", "Total kegiatan ditemukan: " + kegiatanList.size());
-                    adapter.submitList(kegiatanList);
+                    adapter.submitList(new ArrayList<>(allKegiatan));
+                    loadingProgress.setVisibility(View.GONE);
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("ProfileActivity", "Gagal memuat kegiatan", e);
+                    loadingProgress.setVisibility(View.GONE);
                     Toast.makeText(this, "Gagal memuat kegiatan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void deletePost(String postId) {
+        loadingProgress.setVisibility(View.VISIBLE);
+
+        FirebaseFirestore.getInstance()
+                .collection("kegiatan")
+                .document(postId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    loadingProgress.setVisibility(View.GONE);
+                    Toast.makeText(this, "Kegiatan dihapus", Toast.LENGTH_SHORT).show();
+                    loadUserPosts();
+                })
+                .addOnFailureListener(e -> {
+                    loadingProgress.setVisibility(View.GONE);
+                    Toast.makeText(this, "Gagal menghapus: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -189,17 +320,21 @@ public class ProfileActivity extends AppCompatActivity {
         loadUserPosts();
     }
 
-    private void deletePost(String postId) {
-        FirebaseFirestore.getInstance()
-                .collection("kegiatan")
-                .document(postId)
-                .delete()
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Kegiatan dihapus", Toast.LENGTH_SHORT).show();
-                    loadUserPosts(); // Refresh data
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Gagal menghapus: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+    private String uriToBase64(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            byte[] bytes = new byte[inputStream.available()];
+            inputStream.read(bytes);
+            inputStream.close();
+            return Base64.encodeToString(bytes, Base64.DEFAULT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Bitmap base64ToBitmap(String base64Str) {
+        byte[] decodedBytes = Base64.decode(base64Str, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 }
